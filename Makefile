@@ -1,30 +1,33 @@
-CC = gcc
-CFLAGS = -Wall -Wextra -std=c11 -Iincludes
-LDFLAGS = -lsqlite3
+CC      = gcc
+CFLAGS  = -std=c11 -Wall -Wextra -pedantic -O2
+LDFLAGS =
+INCLUDES = -Iincludes
 
-SRC = src/main.c src/db.c src/utils.c src/auth.c src/drivers.c src/vehicles.c src/orders.c src/menu.c
-OBJ = $(patsubst src/%.c,build/%.o,$(SRC))
-TARGET = bin/autopark
+SRC_DIR = src
+OBJ_DIR = build
+BIN     = app
 
-all: $(TARGET)
+SRCS = $(wildcard $(SRC_DIR)/*.c)
+OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 
-build:
-	mkdir -p build
+.PHONY: all clean check distcheck
 
-bin:
-	mkdir -p bin
+all: $(BIN)
 
-$(TARGET): build bin $(OBJ)
-	$(CC) $(OBJ) -o $(TARGET) $(LDFLAGS)
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
-build/%.o: src/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(BIN): $(OBJS)
+	$(CC) $(OBJS) $(LDFLAGS) -o $@
 
 check: all
-	@echo "Build successful"
+	@echo "Running make check (no tests yet)"
 
-distcheck:
-	@echo "Distcheck successful"
+distcheck: check
+	@echo "Running make distcheck (placeholder)"
 
 clean:
-	rm -rf build bin
+	rm -rf $(OBJ_DIR) $(BIN)

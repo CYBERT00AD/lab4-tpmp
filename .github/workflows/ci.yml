@@ -22,6 +22,8 @@ jobs:
 
       - name: Check
         run: make check
+        shell: /usr/bin/bash -e {0}
 
       - name: Distcheck
         run: make distcheck
+        shell: /usr/bin/bash -e {0}
