@@ -1,6 +1,6 @@
 CC      = gcc
 CFLAGS  = -std=c11 -Wall -Wextra -pedantic -O2
-LDFLAGS =
+LDFLAGS = -lsqlite3
 INCLUDES = -Iincludes
 
 SRC_DIR = src
