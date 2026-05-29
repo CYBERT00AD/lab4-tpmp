@@ -24,8 +24,8 @@ $(BIN): $(OBJS)
 	$(CC) $(OBJS) $(LDFLAGS) -o $@
 
 check: all
-	@echo "Running make check (no tests yet)"
-
+	$(MAKE) -C tests
+	./tests/run_tests
 distcheck: check
 	@echo "Running make distcheck (placeholder)"
 
