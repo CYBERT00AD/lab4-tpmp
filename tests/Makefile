@@ -1,12 +1,12 @@
 CC      = gcc
 CFLAGS  = -std=c11 -Wall -Wextra -pedantic -O2
 INCLUDES = -I../includes
-LDFLAGS = -lcunit
+LDFLAGS = -lcunit -lsqlite3
 
 TEST_SRC = test_auth.c
 TEST_BIN = run_tests
 
-APP_SRCS = ../src/auth.c
+APP_SRCS = ../src/auth.c ../src/utils.c
 APP_OBJS = $(APP_SRCS:.c=.o)
 
 .PHONY: all clean
