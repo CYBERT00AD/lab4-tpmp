@@ -6,7 +6,7 @@ LDFLAGS = -lcunit -lsqlite3
 TEST_SRCS = test_auth.c test_drivers.c test_vehicles.c
 TEST_OBJS = $(TEST_SRCS:.c=.o)
 
-APP_SRCS = ../src/auth.c ../src/utils.c ../src/drivers.c ../src/vehicles.c
+APP_SRCS = ../src/auth.c ../src/utils.c ../src/drivers.c ../src/vehicles.c ../src/db.c
 APP_OBJS = $(APP_SRCS:.c=.o)
 
 TEST_BIN = run_tests
